@@ -6,6 +6,8 @@ Entre pelo terminal(Prompt de comandos) na pasta frontend e digite o comando par
 
 $npm install
 
+Substitua o arquivo bootstrap gerado pelo npm pelo bootstrap.min que está aqui para apresentar o tema Lux.
+
 Após instalar as dependências digite o comando para carregar o cliente FrontEnd no seu computador
 $ng serve
 
