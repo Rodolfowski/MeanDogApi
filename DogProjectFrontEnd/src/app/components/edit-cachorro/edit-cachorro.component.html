@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+  <div class="col-md-4 register-cachorro">
+    <!-- form card -->
+    <div class="card-body">
+      <form [formGroup]="cachorroForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="inputName">Nome:</label>
+          <input class="form-control" type="text" formControlName="nome" [(ngModel)]="cachorroNgBinding.nome">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.nome.errors?.required">
+            Nome é requerido para cadastro.
+          </div>
+        </div>
+<!--Raça-->
+        <div class="form-group">
+          <label for="inputPassword3">Raça:</label>
+          <select class="custom-select form-control" (change)="updatePerfilRaca($event.target.value);buscaPorPhoto(cachorroNgBinding.raca)"
+          formControlName="raca" [(ngModel)]="cachorroNgBinding.raca">
+            <option value="">Escolha uma raça...</option>
+            <option *ngFor="let racaCachorro of cachorroRacas.message" value="{{racaCachorro}}">{{racaCachorro}}
+            </option>
+          </select>
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.cor.errors?.required">
+            É preciso escolher uma raça
+          </div>
+        </div>
+<!--Cor Fonte-->
+        <div class="form-group">
+          <label for="inputPassword3">Cor da Fonte:</label>
+          <select [(ngModel)]="cachorroNgBinding.cor" class="custom-select form-control" (change)="updatePerfilCor($event.target.value)"
+            formControlName="cor">
+            <option value="">Escolha uma cor...</option>
+            <option *ngFor="let corCachorro of CachorroCores" value="{{corCachorro.valor}}">{{corCachorro.nome}}
+            </option>
+          </select>
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.cor.errors?.required">
+            É preciso escolher uma cor
+          </div>
+        </div>
+<!--Estilo Fonte-->
+        <div class="form-group">
+          <label for="inputPassword3">Estilo da Fonte:</label>
+          <select class="custom-select form-control" (change)="updatePerfilFonte($event.target.value)"
+            formControlName="fonte" [(ngModel)]="cachorroNgBinding.fonte">
+            <option value="">Escolha uma fonte...</option>
+            <option *ngFor="let fonteCachorro of CachorroFontes" value="{{fonteCachorro}}">{{fonteCachorro}}
+            </option>
+          </select>
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.fonte.errors?.required">
+            É preciso escolher fonte
+          </div>
+        </div>
+<!-- Descrição-->
+<div class="form-group">
+          <label for="inputName">Descrição:</label>
+          <textarea class="form-control" formControlName="descricao" rows='2' [(ngModel)]="cachorroNgBinding.descricao"></textarea>
+<!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.nome.errors?.required">
+            Insira uma Descrição.
+          </div>
+        </div>
+
+<!--Photo-->
+       <div class="form-group">
+          <label for="inputPassword3">Foto:</label>
+          <select class="custom-select form-control" (change)="updatePerfilPhoto($event.target.value)"
+            formControlName="photo" [(ngModel)]="cachorroNgBinding.photo">
+            <option value="">Escolha uma foto...</option>
+            <option *ngFor="let photoCachorro of CachorroPhotos.message" value="{{photoCachorro}}" required>{{photoCachorro}}
+            </option>
+          </select>
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.photo.errors?.required">
+            É preciso escolher uma foto
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Alterar</button>
+        </div>
+      </form>
+
+    </div>
+  </div><!-- form card register -->
+  <div class="col-md-4" [style.color]="cachorroNgBinding.cor" [style.font-family]="cachorroNgBinding.fonte">
+  <div class="card card-body text-center">
+  <img [src]="cachorroNgBinding.photo == '' ? '/assets/noimage.png' : cachorroNgBinding.photo" alt="No Image" class="card-img-top">
+    <h3>{{cachorroNgBinding.nome == '' ? 'Nome do cachorro' : cachorroNgBinding.nome}}</h3>
+    <h5>{{cachorroNgBinding.raca == '' ? 'Raça' : cachorroNgBinding.raca}}</h5>
+    <hr>
+    <p>{{cachorroNgBinding.descricao == '' ? 'Descrição' : cachorroNgBinding.descricao}}</p>
+    <p>Endereço da imagem:<br> {{cachorroNgBinding.photo == '' ? 'URL' : cachorroNgBinding.photo}} </p>
+    </div>
+</div>
+</div>

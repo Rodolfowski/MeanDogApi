@@ -1,0 +1,26 @@
+<div class="container">
+  <!-- No data message -->
+  <p *ngIf="CachorroRegistros.length <= 0; else serverData" class="no-data text-center">Não existem registros de cachorro!</p>
+
+<ng-container #serverData>
+<div class= "row">
+<div class="col-md-4" *ngFor="let cachorro of CachorroRegistros;">
+  <div class="card text-center" [style.font-family]='cachorro.fonte' [style.color]=cachorro.cor>
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+      {{cachorro.nome}} - {{cachorro.raca}}
+      <button class="btn btn-danger delete" type="button" (click)="removeCachorro(cachorro)">
+        <i class="fas fa-trash"></i>
+      </button>
+    </div>
+    <img class="card-img-top" [src]="cachorro.photo">
+    <div class="card-body">
+      <p>{{cachorro.descricao}}</p>
+      <p>Atualizado: {{cachorro.date | date: 'dd-MM-yyyy hh:mm:ss'}}</p>
+      <a [routerLink]="['/edit-cachorro/', cachorro._id]" class="btn btn-info btn-block">
+        Editar
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</ng-container>
